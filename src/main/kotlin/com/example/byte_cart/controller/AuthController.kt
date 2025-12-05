@@ -36,6 +36,7 @@ class AuthController(private val authService: AuthService) {
     @GetMapping("/me")
     @ResponseStatus(HttpStatus.OK)
     fun getCurrentUser(@AuthenticationPrincipal userDetails: UserDetails): UserDto{
-        return authService.getCurrentUser(userDetails.username)
+        val user = authService.getCurrentUser(userDetails.username)
+        return UserDto(user.id, user.username)
     }
 }
