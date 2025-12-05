@@ -39,7 +39,8 @@ class SecurityConfig(private val jwtAuthFilter: JwtAuthFilter
             .csrf { it.disable() }
             .authorizeHttpRequests { auth ->
                 auth
-                    .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/api/auth/**","/api/products/**","/images/**").permitAll()
+                    .requestMatchers("/api/cart/**","/api/orders/**").authenticated()
                     .anyRequest().authenticated()
             }
             .cors(Customizer.withDefaults())
