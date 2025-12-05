@@ -1,5 +1,6 @@
 package com.example.byte_cart.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 
 @Entity
@@ -12,8 +13,10 @@ class User(
     @Column(nullable = false, unique = true)
     var username: String = "",
 
+    @JsonIgnore // Exclude password from JSON serialization
     @Column(nullable = false)
     var password: String? = "",
 
 ) {
+    constructor(): this (0, "", "")
 }
